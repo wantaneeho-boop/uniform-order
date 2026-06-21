@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบจองเครื่องแบบนักศึกษา ปวช. ปีการศึกษา 2569</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --navy: #1a2a4a;
+    --navy-mid: #2d4270;
+    --accent: #e85d04;
+    --accent-light: #fff3ee;
+    --gold: #f4a732;
+    --bg: #f7f8fc;
+    --white: #ffffff;
+    --border: #dde3f0;
+    --text: #1e2d4a;
+    --text-light: #5a6a85;
+    --success: #1b7a4e;
+    --success-bg: #e8f7f0;
+    --shadow: 0 2px 16px rgba(26,42,74,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: white;
+    padding: 28px 24px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(244,167,50,0.13);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 14px;
+    opacity: 0.85;
+  }
+  .budget-pill {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* Info section */
+  .info-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 18px;
+  }
+  .info-card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card h2 .icon {
+    width: 24px; height: 24px;
+    background: var(--navy);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .form-row.single { grid-template-columns: 1fr; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 5px;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--navy-mid);
+    background: var(--white);
+  }
+
+  /* Category */
+  .category-section {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .category-header {
+    background: var(--navy);
+    color: white;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .category-header .cat-icon {
+    font-size: 16px;
+  }
+
+  .product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .product-item:last-child { border-bottom: none; }
+  .product-item:hover { background: var(--bg); }
+
+  .product-info { flex: 1; min-width: 0; }
+  .product-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .product-price {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .product-code {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .qty-btn {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    line-height: 1;
+  }
+  .qty-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+  .qty-input {
+    width: 42px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 4px 2px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+  }
+  .qty-input:focus { border-color: var(--navy-mid); }
+
+  .item-total {
+    min-width: 52px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--success);
+    flex-shrink: 0;
+  }
+
+  /* Summary */
+  .summary-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 18px;
+    position: sticky;
+    bottom: 16px;
+  }
+  .summary-header {
+    background: var(--accent);
+    color: white;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .summary-body {
+    padding: 14px 18px;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-row.total {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    padding-top: 10px;
+    margin-top: 4px;
+    border-top: 2px solid var(--border);
+    border-bottom: none;
+  }
+  .summary-row.budget {
+    color: var(--text-light);
+    font-size: 13px;
+  }
+  .diff-positive { color: var(--success); font-weight: 700; }
+  .diff-negative { color: #c0392b; font-weight: 700; }
+
+  /* Selected items list in summary */
+  #selected-list {
+    margin-top: 8px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .selected-item-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--text-light);
+    padding: 2px 0;
+  }
+
+  .warning-box {
+    background: #fff8e1;
+    border: 1.5px solid var(--gold);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: #7a5700;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .btn-print {
+    width: 100%;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .btn-print:hover { opacity: 0.88; }
+
+  .btn-reset {
+    width: 100%;
+    background: white;
+    color: var(--text-light);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 11px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* Print */
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; }
+    .header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .category-header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .summary-card { position: static; box-shadow: none; }
+  }
+
+  @media (max-width: 500px) {
+    .form-row { grid-template-columns: 1fr; }
+    .header h1 { font-size: 18px; }
+    .product-name { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">วิทยาลัยเทคโนโลยีไออาร์พีซี</div>
+  <h1>แบบจองเครื่องแบบนักศึกษา<br>ระดับ ปวช. ปีการศึกษา 2569</h1>
+  <p>iMart — ร้านค้าภายในวิทยาลัย</p>
+  <div class="budget-pill">💰 งบประมาณ 950 บาท/คน</div>
+</div>
+
+<div class="container">
+
+  <!-- ข้อมูลนักศึกษา -->
+  <div class="info-card">
+    <h2><span class="icon">📋</span> ข้อมูลนักศึกษา</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>ชื่อ-นามสกุล *</label>
+        <input type="text" id="std-name" placeholder="กรอกชื่อ-นามสกุล">
+      </div>
+      <div class="form-group">
+        <label>รหัสนักศึกษา *</label>
+        <input type="text" id="std-id" placeholder="เช่น 6901001">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>ระดับชั้น</label>
+        <select id="std-level">
+          <option value="">-- เลือกระดับชั้น --</option>
+          <option>ปวช. 1</option>
+          <option>ปวช. 2</option>
+          <option>ปวช. 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>แผนกวิชา *</label>
+        <select id="std-dept">
+          <option value="">-- เลือกแผนก --</option>
+          <option>ช่างยนต์ (ชชย.)</option>
+          <option>ช่างกลโรงงาน (ชชก.)</option>
+          <option>ช่างไฟฟ้า (ชชฟ.)</option>
+          <option>ช่างอิเล็กทรอนิกส์ (ชชอ.)</option>
+          <option>การบัญชี (ชบช.)</option>
+          <option>เทคโนโลยีธุรกิจดิจิทัล (ชทธ.)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>เบอร์ติดต่อ</label>
+        <input type="tel" id="std-phone" placeholder="0XX-XXXXXXX">
+      </div>
+      <div class="form-group">
+        <label>เพศ (เพื่อแนะนำสินค้า)</label>
+        <select id="std-gender">
+          <option value="">-- เลือก --</option>
+          <option>ชาย</option>
+          <option>หญิง</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    ⚠️ <strong>หมายเหตุ:</strong> กรณีเลือกสินค้าเกินงบประมาณ 950 บาท ที่ปรึกษาจะรวบรวมเงินค่าส่วนต่างมาชำระเพิ่มที่ร้านค้า iMart
+  </div>
+
+  <!-- เนคไทน์ -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👔</span> เนคไทน์</div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">เนคไทน์ช่างอุตสาหกรรม สีเลือดหมู</div>
+        <div class="product-code">รหัส: 0000692</div>
+        <div class="product-price">170 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="170" data-name="เนคไทน์ช่างอุตสาหกรรม" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">เนคไทน์แผนกพาณิชยการ สีกรมท่า</div>
+        <div class="product-code">รหัส: 0000695</div>
+        <div class="product-price">170 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="170" data-name="เนคไทน์พาณิชยการ" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+  </div>
+
+  <!-- เสื้อพลานามัย -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👕</span> เสื้อพลานามัยสีแดง</div>
+    <div id="shirt-pe"></div>
+  </div>
+
+  <!-- กางเกงวอร์ม -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👖</span> กางเกงวอร์ม</div>
+    <div id="pants-sport"></div>
+  </div>
+
+  <!-- เสื้อ SHOP ปวช -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">🔧</span> เสื้อฝึกปฏิบัติการ SHOP ปวช.</div>
+    <div id="shirt-shop"></div>
+  </div>
+
+  <!-- กางเกง SHOP -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">🔩</span> กางเกงฝึกปฏิบัติการ (SHOP)</div>
+    <div id="pants-shop"></div>
+  </div>
+
+  <!-- เสื้อพิธีการ ชาย -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👔</span> เสื้อพิธีการแขนสั้น ปวช. ชาย</div>
+    <div id="shirt-ceremony-m"></div>
+  </div>
+
+  <!-- เสื้อพิธีการ หญิง -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👗</span> เสื้อพิธีการแขนสั้น ปวช. หญิง</div>
+    <div id="shirt-ceremony-f"></div>
+  </div>
+
+  <!-- กางเกงพิธีการ -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👖</span> กางเกงพิธีการ</div>
+    <div id="pants-ceremony"></div>
+  </div>
+
+  <!-- กระโปรงพิธีการ -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👗</span> กระโปรงพิธีการจีบรอบ ปวช.</div>
+    <div id="skirt-ceremony"></div>
+  </div>
+
+  <!-- รองเท้าเซฟตี้ -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">👟</span> รองเท้าเซฟตี้</div>
+    <div id="shoes-safety"></div>
+  </div>
+
+  <!-- ถุงเท้า -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">🧦</span> ถุงเท้า</div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">ถุงเท้านักเรียนหญิง</div>
+        <div class="product-code">รหัส: 0000704</div>
+        <div class="product-price">30 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="30" data-name="ถุงเท้าหญิง" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">ถุงเท้านักเรียนชาย</div>
+        <div class="product-code">รหัส: 0000705</div>
+        <div class="product-price">30 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="30" data-name="ถุงเท้าชาย" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+  </div>
+
+  <!-- อื่นๆ -->
+  <div class="category-section">
+    <div class="category-header"><span class="cat-icon">🎒</span> อุปกรณ์เสริม</div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">สายเข็มขัด ยาว 42-48 นิ้ว</div>
+        <div class="product-code">รหัส: 0000697 | ระบุขนาดในหมายเหตุ</div>
+        <div class="product-price">120 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="120" data-name="สายเข็มขัด 42-48 นิ้ว" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">สายเข็มขัด ยาว 50-56 นิ้ว</div>
+        <div class="product-code">รหัส: 0001996 | ระบุขนาดในหมายเหตุ</div>
+        <div class="product-price">150 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="150" data-name="สายเข็มขัด 50-56 นิ้ว" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">สายคล้องบัตรสกรีนโลโก้วิทยาลัย สีกรมท่า</div>
+        <div class="product-code">รหัส: 0000700</div>
+        <div class="product-price">75 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="75" data-name="สายคล้องบัตร" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">กรอบใส่บัตรนักศึกษา แนวนอน</div>
+        <div class="product-code">รหัส: 0000701</div>
+        <div class="product-price">15 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="15" data-name="กรอบใส่บัตร" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">หัวเข็มขัดวิทยาลัย</div>
+        <div class="product-code">รหัส: 0000702</div>
+        <div class="product-price">100 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="100" data-name="หัวเข็มขัดวิทยาลัย" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+    <div class="product-item">
+      <div class="product-info">
+        <div class="product-name">ตุ้งติ้ง</div>
+        <div class="product-code">รหัส: 0001065</div>
+        <div class="product-price">85 บาท</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input class="qty-input" type="number" value="0" min="0" data-price="85" data-name="ตุ้งติ้ง" onchange="updateTotal()">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <div class="item-total">-</div>
+    </div>
+  </div>
+
+  <!-- หมายเหตุ -->
+  <div class="info-card">
+    <h2><span class="icon">📝</span> หมายเหตุเพิ่มเติม</h2>
+    <div class="form-group">
+      <textarea id="remark" placeholder="ระบุขนาดสายเข็มขัด หรือข้อมูลเพิ่มเติม..." rows="3"
+        style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sarabun',sans-serif;font-size:14px;resize:vertical;outline:none;background:var(--bg);color:var(--text);" 
+        onfocus="this.style.borderColor='var(--navy-mid)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+  </div>
+
+  <!-- สรุป -->
+  <div class="summary-card">
+    <div class="summary-header">🧾 สรุปรายการและยอดรวม</div>
+    <div class="summary-body">
+      <div id="selected-list"></div>
+      <div class="summary-row budget">
+        <span>งบประมาณที่ได้รับ</span>
+        <span>950 บาท</span>
+      </div>
+      <div class="summary-row total">
+        <span>ยอดรวมที่เลือก</span>
+        <span id="grand-total">0 บาท</span>
+      </div>
+      <div class="summary-row" id="diff-row" style="display:none;">
+        <span id="diff-label">ส่วนต่าง</span>
+        <span id="diff-val" class="diff-positive">0 บาท</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-print no-print" onclick="handlePrint()">🖨️ พิมพ์ / บันทึกใบจอง</button>
+  <button class="btn-reset no-print" onclick="resetForm()">🔄 เริ่มใหม่ / ล้างข้อมูล</button>
+
+</div>
+
+<script>
+// ข้อมูลสินค้าแต่ละหมวด
+const products = {
+  'shirt-pe': [
+    {code:'0004040',name:'เสื้อพลานามัยสีแดง Size S',price:320},
+    {code:'0004025',name:'เสื้อพลานามัยสีแดง Size M',price:320},
+    {code:'0004053',name:'เสื้อพลานามัยสีแดง Size L',price:320},
+    {code:'0004054',name:'เสื้อพลานามัยสีแดง Size XL',price:320},
+    {code:'0000646',name:'เสื้อพลานามัยสีแดง Size 2XL',price:340},
+    {code:'0000684',name:'เสื้อพลานามัยสีแดง Size 3XL',price:340},
+    {code:'0003758',name:'เสื้อพลานามัยสีแดง Size 4XL',price:360},
+    {code:'0003759',name:'เสื้อพลานามัยสีแดง Size 5XL',price:360},
+  ],
+  'pants-sport': [
+    {code:'0000652',name:'กางเกงวอร์ม Size S',price:330},
+    {code:'0000653',name:'กางเกงวอร์ม Size M',price:330},
+    {code:'0000654',name:'กางเกงวอร์ม Size L',price:330},
+    {code:'0000655',name:'กางเกงวอร์ม Size XL',price:330},
+    {code:'0000656',name:'กางเกงวอร์ม Size 2XL',price:370},
+    {code:'0003940',name:'กางเกงวอร์ม Size 3XL',price:370},
+    {code:'0004213',name:'กางเกงวอร์ม Size 4XL',price:470},
+  ],
+  'shirt-shop': [
+    {code:'0000002',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size S',price:750},
+    {code:'0000574',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size M',price:750},
+    {code:'0000575',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size L',price:750},
+    {code:'0000576',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size XL',price:820},
+    {code:'0000577',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size 2XL',price:820},
+    {code:'0001359',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size 3XL',price:820},
+    {code:'0000579',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size 4XL',price:860},
+    {code:'0003806',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size 5XL',price:860},
+    {code:'0003807',name:'เสื้อฝึกปฏิบัติการ SHOP ปวช. Size 6XL',price:860},
+  ],
+  'pants-shop': [
+    {code:'0000624',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 26',price:650},
+    {code:'0000625',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 28',price:650},
+    {code:'0000626',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 30',price:650},
+    {code:'0000627',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 32',price:650},
+    {code:'0000628',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 34',price:650},
+    {code:'0000629',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 36',price:730},
+    {code:'0000630',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 38',price:730},
+    {code:'0000631',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 40',price:730},
+    {code:'0000632',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 42',price:730},
+    {code:'0000633',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 44',price:800},
+    {code:'0002037',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 46',price:800},
+    {code:'0002038',name:'กางเกงฝึกปฏิบัติการ (SHOP) Size 48',price:800},
+  ],
+  'shirt-ceremony-m': [
+    {code:'0000586',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size S',price:350},
+    {code:'0000587',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size M',price:350},
+    {code:'0000588',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size L',price:350},
+    {code:'0000589',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size XL',price:350},
+    {code:'0000590',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size 2XL',price:370},
+    {code:'0001365',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size 3XL',price:370},
+    {code:'0001366',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size 4XL',price:370},
+    {code:'0002792',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size 5XL',price:390},
+    {code:'0002793',name:'เสื้อพิธีการแขนสั้น ปวช. ชาย Size 6XL',price:390},
+  ],
+  'shirt-ceremony-f': [
+    {code:'0000647',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size S',price:350},
+    {code:'0000648',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size M',price:350},
+    {code:'0000649',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size L',price:350},
+    {code:'0000650',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size XL',price:350},
+    {code:'0000651',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size 2XL',price:370},
+    {code:'0001620',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size 3XL',price:370},
+    {code:'0001621',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size 4XL',price:370},
+    {code:'0002790',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size 5XL',price:390},
+    {code:'0002791',name:'เสื้อพิธีการแขนสั้น ปวช. หญิง Size 6XL',price:390},
+  ],
+  'pants-ceremony': [
+    {code:'0000614',name:'กางเกงพิธีการ Size 26',price:550},
+    {code:'0000615',name:'กางเกงพิธีการ Size 28',price:550},
+    {code:'0000616',name:'กางเกงพิธีการ Size 30',price:550},
+    {code:'0000617',name:'กางเกงพิธีการ Size 32',price:550},
+    {code:'0000618',name:'กางเกงพิธีการ Size 34',price:550},
+    {code:'0000619',name:'กางเกงพิธีการ Size 36',price:650},
+    {code:'0000620',name:'กางเกงพิธีการ Size 38',price:650},
+    {code:'0000621',name:'กางเกงพิธีการ Size 40',price:650},
+    {code:'0000622',name:'กางเกงพิธีการ Size 42',price:650},
+    {code:'0001047',name:'กางเกงพิธีการ Size 44',price:700},
+    {code:'0002039',name:'กางเกงพิธีการ Size 46',price:700},
+    {code:'0000623',name:'กางเกงพิธีการ Size 48',price:700},
+  ],
+  'skirt-ceremony': [
+    {code:'0004906',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 24',price:550},
+    {code:'0000600',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 26',price:550},
+    {code:'0000601',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 28',price:550},
+    {code:'0000602',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 30',price:550},
+    {code:'0000603',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 32',price:550},
+    {code:'0000604',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 34',price:550},
+    {code:'0000605',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 36',price:550},
+    {code:'0000606',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 38',price:580},
+    {code:'0000607',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 40',price:580},
+    {code:'0001340',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 42',price:580},
+    {code:'0002968',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 44',price:600},
+    {code:'0002969',name:'กระโปรงพิธีการจีบรอบ ปวช. Size 46',price:600},
+  ],
+  'shoes-safety': Array.from({length:11},(_,i)=>({
+    code:`000409${5+i}`,
+    name:`รองเท้าเซฟตี้ Size ${36+i}`,
+    price:620
+  }))
+};
+
+function buildProducts() {
+  Object.entries(products).forEach(([id, items]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = items.map((p,i) => `
+      <div class="product-item">
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-code">รหัส: ${p.code}</div>
+          <div class="product-price">${p.price.toLocaleString()} บาท</div>
+        </div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input class="qty-input" type="number" value="0" min="0" 
+            data-price="${p.price}" data-name="${p.name}" onchange="updateTotal()">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <div class="item-total">-</div>
+      </div>
+    `).join('');
+  });
+}
+
+function changeQty(btn, delta) {
+  const input = btn.parentElement.querySelector('input');
+  const newVal = Math.max(0, parseInt(input.value || 0) + delta);
+  input.value = newVal;
+  updateTotal();
+}
+
+function updateTotal() {
+  let grand = 0;
+  const selected = [];
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseInt(input.value) || 0;
+    const price = parseInt(input.dataset.price) || 0;
+    const name = input.dataset.name || '';
+    const subtotal = qty * price;
+    const totalEl = input.closest('.product-item').querySelector('.item-total');
+    if (qty > 0) {
+      totalEl.textContent = subtotal.toLocaleString() + ' ฿';
+      selected.push({name, qty, subtotal});
+      grand += subtotal;
+    } else {
+      totalEl.textContent = '-';
+    }
+  });
+
+  document.getElementById('grand-total').textContent = grand.toLocaleString() + ' บาท';
+
+  const budget = 950;
+  const diff = budget - grand;
+  const diffRow = document.getElementById('diff-row');
+  const diffLabel = document.getElementById('diff-label');
+  const diffVal = document.getElementById('diff-val');
+
+  if (grand > 0) {
+    diffRow.style.display = 'flex';
+    if (diff >= 0) {
+      diffLabel.textContent = 'เหลืองบประมาณ';
+      diffVal.textContent = diff.toLocaleString() + ' บาท';
+      diffVal.className = 'diff-positive';
+    } else {
+      diffLabel.textContent = 'เกินงบประมาณ (น.ศ.ชำระเอง)';
+      diffVal.textContent = Math.abs(diff).toLocaleString() + ' บาท';
+      diffVal.className = 'diff-negative';
+    }
+  } else {
+    diffRow.style.display = 'none';
+  }
+
+  const listEl = document.getElementById('selected-list');
+  if (selected.length > 0) {
+    listEl.innerHTML = selected.map(s =>
+      `<div class="selected-item-row"><span>${s.name} x${s.qty}</span><span>${s.subtotal.toLocaleString()} ฿</span></div>`
+    ).join('');
+  } else {
+    listEl.innerHTML = '<div style="color:var(--text-light);font-size:13px;padding:4px 0;">ยังไม่ได้เลือกสินค้า</div>';
+  }
+}
+
+function handlePrint() {
+  const name = document.getElementById('std-name').value.trim();
+  if (!name) {
+    alert('กรุณากรอกชื่อ-นามสกุลก่อนพิมพ์');
+    document.getElementById('std-name').focus();
+    return;
+  }
+  window.print();
+}
+
+function resetForm() {
+  if (!confirm('ล้างข้อมูลทั้งหมดหรือไม่?')) return;
+  document.querySelectorAll('.qty-input').forEach(i => i.value = 0);
+  document.querySelectorAll('.item-total').forEach(el => el.textContent = '-');
+  ['std-name','std-id','std-phone'].forEach(id => document.getElementById(id).value = '');
+  ['std-level','std-dept','std-gender'].forEach(id => document.getElementById(id).selectedIndex = 0);
+  document.getElementById('remark').value = '';
+  document.getElementById('grand-total').textContent = '0 บาท';
+  document.getElementById('diff-row').style.display = 'none';
+  document.getElementById('selected-list').innerHTML = '';
+}
+
+buildProducts();
+updateTotal();
+</script>
+</body>
+</html>
